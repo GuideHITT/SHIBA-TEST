@@ -1,22 +1,16 @@
 fileFormatVersion: 2
-guid: 77699d0dd671b914697d28226acc92b3
+guid: e4343a3e24c93854ab2c362abed34118
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1963375862519053129
-    second: ShibaIdle_0
+      213: 1528323153650119813
+    second: ShibaFall_0
   - first:
-      213: -4607051848752271539
-    second: ShibaIdle_1
+      213: -4940436905226289213
+    second: ShibaFall_1
   - first:
-      213: 7416637776150851150
-    second: ShibaIdle_2
-  - first:
-      213: -3252002347384390941
-    second: ShibaIdle_3
-  - first:
-      213: -23943285160428286
-    second: ShibaIdle_4
+      213: 888097689404554163
+    second: ShibaFall_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -118,106 +112,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ShibaIdle_0
+      name: ShibaFall_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 1
         y: 0
-        width: 22
-        height: 17
+        width: 27
+        height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b4c9f13e00b0c4e0800000000000000
-      internalID: -1963375862519053129
+      spriteID: 584f1539fc1b53510800000000000000
+      internalID: 1528323153650119813
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ShibaIdle_1
+      name: ShibaFall_1
       rect:
         serializedVersion: 2
-        x: 44
+        x: 40
         y: 0
-        width: 22
-        height: 17
+        width: 28
+        height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4f6055b0c67010c0800000000000000
-      internalID: -4607051848752271539
+      spriteID: 3cfb1cc6fca007bb0800000000000000
+      internalID: -4940436905226289213
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ShibaIdle_2
+      name: ShibaFall_2
       rect:
         serializedVersion: 2
-        x: 84
+        x: 80
         y: 0
-        width: 22
-        height: 17
+        width: 28
+        height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4ee63b23c03de660800000000000000
-      internalID: 7416637776150851150
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ShibaIdle_3
-      rect:
-        serializedVersion: 2
-        x: 124
-        y: 0
-        width: 22
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3eaba6b48119ed2d0800000000000000
-      internalID: -3252002347384390941
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ShibaIdle_4
-      rect:
-        serializedVersion: 2
-        x: 164
-        y: 0
-        width: 22
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 20db14185bfeaaff0800000000000000
-      internalID: -23943285160428286
+      spriteID: 3bbbdc6a428235c00800000000000000
+      internalID: 888097689404554163
       vertices: []
       indices: 
       edges: []
