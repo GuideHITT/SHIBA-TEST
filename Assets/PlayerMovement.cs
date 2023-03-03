@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         //move the character
         rb2d.velocity = new Vector2(horizMovement * speed,rb2d.velocity.y);
         Flip(horizMovement);
-        shibaAnimator.SetFloat("speed",Mathf.Abs(horizMovement));
+        
     }
 
     private void Flip(float horizontal)
