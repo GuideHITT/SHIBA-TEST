@@ -30,9 +30,9 @@ public class Stats
         set
         {
             this.currentVal = Mathf.Clamp(value, 0, maxVal);
-            
         }
     }
+
     public void Initialise ()
     {
         this.MaxVal = maxVal;
