@@ -21,18 +21,25 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected LayerMask whatIsGround;
     [SerializeField] protected float radOfCircle;
+    
 
     //[attack variable]
+    [SerializeField] protected Transform attackPoint;
+    [SerializeField] protected float attackRange = 0.5f;
+    [SerializeField] protected LayerMask characterLayers;
 
     //[character stats]
+    [SerializeField] protected Stats healthStat;
     protected Rigidbody2D rb;
     protected Animator myAnimator;
- 
+    protected abstract bool dead { get; }
+
     #region monos
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        healthStat.Initialise();
     }
 
     public virtual void Update()
@@ -69,14 +76,29 @@ public abstract class Character : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
+
+    public void Attack()
+    { 
+        //play attack animation
+        myAnimator.SetTrigger("attack");
+        //detect enemy
+        Collider2D[] hitCharacter = Physics2D.OverlapCircleAll(attackPoint.position,attackRange,characterLayers);
+        //damage
+        foreach (Collider2D character in hitCharacter)
+        {
+            StartCoroutine(character.GetComponent<Character>().TakeDamage());
+            Debug.Log("HIT "+character.name);
+        }
+    }
     
     #endregion
     
     #region subMechanics
 
+    public abstract IEnumerator TakeDamage();
+
     protected abstract void HandleJumping();
-    
-    
+
     protected void TurnAround(float horizontal)
     {
         if (horizontal < 0 && facingRight || horizontal > 0 && !facingRight)
@@ -100,6 +122,7 @@ public abstract class Character : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(groundCheck.position, radOfCircle);
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
     #endregion
 }
