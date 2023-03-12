@@ -9,6 +9,7 @@ public class Player : Character
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected LayerMask whatIsGround;
     [SerializeField] protected float radOfCircle;
+    public float thrust;
 
     protected override bool dead
     {
@@ -76,16 +77,8 @@ public class Player : Character
         myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
 
-    public override IEnumerator TakeDamage(float KBforce)
+    public override IEnumerator TakeDamage()
     {
-        if (facingRight)
-        {
-            rb.AddForce(Vector2.right * KBforce,ForceMode2D.Impulse);
-        }
-        else
-        {
-            rb.AddForce(Vector2.left * KBforce,ForceMode2D.Impulse);
-        }
         healthStat.CurrentVal--;
         if (!dead)
         {

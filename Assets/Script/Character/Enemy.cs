@@ -85,7 +85,7 @@ public class Enemy : Character
         }
     }
 
-    public override IEnumerator TakeDamage(float KBForce)
+    public override IEnumerator TakeDamage()
     {
         healthStat.CurrentVal--;
         if (!dead)

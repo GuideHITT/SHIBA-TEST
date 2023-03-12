@@ -238,9 +238,9 @@ GameObject:
   - component: {fileID: 231781318}
   - component: {fileID: 231781317}
   - component: {fileID: 231781322}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dobberman
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -340,7 +340,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: -8283665674810759199, guid: a21b4ec791b7358468bdf8cc46c4c745, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -384,20 +384,18 @@ MonoBehaviour:
   speed: 2
   jumpForce: 0
   attackRange: 0.5
-  attackCheck: {fileID: 588512666}
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
+  KBForce: 5
+  attackCheck: {fileID: 588512666}
   characterType: Enemy
   healthStat:
     maxVal: 3
-    OnHitWithReference:
-      m_PersistentCalls:
-        m_Calls: []
     currentVal: 3
   <TakingDamage>k__BackingField: 0
   <myAnimator>k__BackingField: {fileID: 0}
-  meleeRange: 0.8
+  meleeRange: 2
   visibleRange: 5
   leftEdge: {fileID: 12926627}
   rightEdge: {fileID: 233207019}
@@ -1071,7 +1069,6 @@ GameObject:
   - component: {fileID: 607658367}
   - component: {fileID: 607658366}
   - component: {fileID: 607658371}
-  - component: {fileID: 607658369}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -1228,27 +1225,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &607658369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 607658362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbbbc51b747711844948cc02a8a9a49b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  streght: 10
-  delay: 0.15
-  OnBegin:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDone:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &607658371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1264,16 +1240,14 @@ MonoBehaviour:
   speed: 6.7
   jumpForce: 13.5
   attackRange: 0.7
-  attackCheck: {fileID: 262136001}
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 64
+  KBForce: 5
+  attackCheck: {fileID: 262136001}
   characterType: Player
   healthStat:
     maxVal: 3
-    OnHitWithReference:
-      m_PersistentCalls:
-        m_Calls: []
     currentVal: 3
   <TakingDamage>k__BackingField: 0
   <myAnimator>k__BackingField: {fileID: 0}
@@ -1283,6 +1257,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   radOfCircle: 0.09
+  thrust: 5
 --- !u!1 &854176072
 GameObject:
   m_ObjectHideFlags: 0

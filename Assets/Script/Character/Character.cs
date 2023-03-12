@@ -44,7 +44,6 @@ public abstract class Character : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
-
     protected void Attack()
     { 
         //play attack animation
@@ -52,13 +51,13 @@ public abstract class Character : MonoBehaviour
         //detect enemy
         Collider2D target = Physics2D.OverlapCircle(attackCheck.position,attackRange,whatIsTarget);
         //damage
-        if(target != null )
+        if(target != null)
         {
-            Debug.Log(characterType+ " attacked " +target.GetComponent<Character>().characterType);
-            StartCoroutine(target.GetComponent<Character>().TakeDamage(KBForce));
+            Debug.Log(characterType + " attacked " +target.GetComponent<Character>().characterType);
+            StartCoroutine(target.GetComponent<Character>().TakeDamage());
         }
     }
-    public abstract IEnumerator TakeDamage(float KBforce);
+    public abstract IEnumerator TakeDamage();
     protected void TurnAround()
     {
         facingRight = !facingRight;
