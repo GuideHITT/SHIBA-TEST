@@ -42,8 +42,8 @@ public class MeleeState : IEnemyState
     {
         
     }
-    
-    public void Attack()
+
+    private void Attack()
     {
         attackTimer += Time.deltaTime;
         if (attackTimer>=attackCooldown)

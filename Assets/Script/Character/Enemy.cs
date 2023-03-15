@@ -13,8 +13,8 @@ public class Enemy : Character
     [SerializeField]private float meleeRange;
     [SerializeField]private float visibleRange;
     [SerializeField]private Transform leftEdge, rightEdge;
-    [SerializeField]private Vector3 distanceToPlayer;
-    
+    [SerializeField]private Vector3 distanceToTarget;
+
     private SpriteRenderer spRend;
 
     public Transform player;
@@ -71,7 +71,7 @@ public class Enemy : Character
             }
             LookAtTarget();
         }
-        distanceToPlayer.x = player.transform.position.x - transform.position.x;
+        distanceToTarget.x = player.transform.position.x - transform.position.x;
     }
 
     #endregion
@@ -87,6 +87,14 @@ public class Enemy : Character
 
     public override IEnumerator TakeDamage()
     {
+        if (distanceToTarget.x < 0)
+        {
+            rb.AddForce(Vector2.right * KBForce ,ForceMode2D.Impulse);
+        }
+        else if (distanceToTarget.x > 0)
+        {
+            rb.AddForce(Vector2.left * KBForce ,ForceMode2D.Impulse);
+        }
         healthStat.CurrentVal--;
         if (!dead)
         {

@@ -9,9 +9,9 @@ public abstract class Character : MonoBehaviour
 { 
     //[Movement variable]
     [SerializeField] protected float speed = 2.0f;
-    protected float direction;
+    protected float Direction;
     protected bool facingRight = true;
-    
+
     //[Jump variable]
     //jump details//
     [SerializeField]protected float jumpForce;
@@ -22,7 +22,6 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected LayerMask whatIsTarget;
     [SerializeField] public float KBForce;
     public Transform attackCheck;
-    public bool attacking { get; set; }
 
     //[character stats]
     public string characterType;
@@ -31,21 +30,20 @@ public abstract class Character : MonoBehaviour
     [field: SerializeField]public Animator myAnimator { get; private set; }
     protected Rigidbody2D rb;
     protected abstract bool dead { get; }
-    
+
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         healthStat.Initialise();
-        attacking = false;
     }
-    
+
     protected void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
     protected void Attack()
-    { 
+    {
         //play attack animation
         myAnimator.SetTrigger("attack");
         //detect enemy
@@ -63,5 +61,4 @@ public abstract class Character : MonoBehaviour
         facingRight = !facingRight;
         transform.localScale = new Vector2(transform.localScale.x * -1, 1);
     }
-    
 }

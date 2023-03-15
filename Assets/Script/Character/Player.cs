@@ -1,15 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class Player : Character
 {
-    private float playerspeed = 6.7f;
-    public bool grounded;
+    [SerializeField] protected float radOfCircle;
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected LayerMask whatIsGround;
-    [SerializeField] protected float radOfCircle;
-    public float thrust;
+    public bool grounded;
+    private float nextAttackTime;
+    private float attackRate = 2;
+
+    private float coyoteTime = 0.2f;
+    private float coyoteTimeCounter;
+    private float jumpBufferTime = 0.2f;
+    private float jumpBufferCounter;
+    
+    private float playerspeed = 6.7f;
+    public ParticleSystem dust;
+    [SerializeField] protected float kbForceUp = 0.5f;
 
     protected override bool dead
     {
@@ -32,18 +43,23 @@ public class Player : Character
         {
             myAnimator.SetBool("fall", true);
         }
-        direction = Input.GetAxisRaw("Horizontal");
-        Flip(direction);
+
+        Direction = Input.GetAxisRaw("Horizontal");
+        Flip(Direction);
         HandleMovement();
         HandleJumping();
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Time.time >= nextAttackTime)
         {
-            Attack();
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
         }
     }
 
-    public void Flip(float horizontal)
+    private void Flip(float horizontal)
     {
         if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
         {
@@ -59,14 +75,30 @@ public class Player : Character
         
         if (grounded)
         {
+            coyoteTimeCounter = coyoteTime;
             myAnimator.ResetTrigger("isJump");
             myAnimator.SetBool("fall", false);
         }
-
-        if (Input.GetButtonDown("Jump") && grounded)
+        else
         {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpBufferCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+
+        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f)
+        {
+            CreateDust();
             Jump();
             myAnimator.SetTrigger("isJump");
+            coyoteTimeCounter = 0f;
         }
     }
     private void HandleMovement()
@@ -79,9 +111,11 @@ public class Player : Character
 
     public override IEnumerator TakeDamage()
     {
+        myAnimator.SetTrigger("hurt");
         healthStat.CurrentVal--;
         if (!dead)
         {
+            KnockBack();
             Debug.Log("player hp at"+healthStat.CurrentVal);
         }
         else
@@ -89,6 +123,37 @@ public class Player : Character
             Debug.Log("PLAYER DIED");
         }
         yield return null;
+    }
+    public void CreateDust()
+    {
+        dust.Play();
+    }
+
+    private void KnockBack()
+    {
+        Transform attacker = GETClosestDamageSource();
+        Vector2 knockBackDirec = new Vector2(transform.position.x - attacker.transform.position.x, 0);
+        rb.velocity = new Vector2(knockBackDirec.x, kbForceUp) * KBForce;
+    }
+
+    private Transform GETClosestDamageSource()
+    {
+        GameObject[] damageSource = GameObject.FindGameObjectsWithTag("enemy");
+        float closestDist = Mathf.Infinity;
+        Transform currentClosestDamageSource = null;
+
+        foreach (GameObject go in damageSource)
+        {
+            float currentDist;
+            currentDist = Vector3.Distance(transform.position, go.transform.position);
+            if (currentDist < closestDist)
+            {
+                closestDist = currentDist;
+                currentClosestDamageSource = go.transform;
+            }
+        }
+
+        return currentClosestDamageSource;
     }
 
     private void OnDrawGizmos()
